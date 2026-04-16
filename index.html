@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Kia Foundation — WRT 307 Agency Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --pink:      #E0187A;
+    --pink-lt:   #F04EA0;
+    --pink-dk:   #B8126A;
+    --cyan:      #2BBFBF;
+    --black:     #4a8cbbd0;
+    --white:     #FFFFFF;
+    --off-white: #FAFAFA;
+    --light:     #FDF0F7;
+    --mid:       #6B6070;
+    --rule:      #E8D5E0;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--off-white);
+    color: var(--black);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:200;
+    background: var(--black);
+    display: flex; align-items: stretch;
+    height: 60px;
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0 2rem;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    flex-shrink: 0; cursor: pointer;
+  }
+  .nav-paw { font-size: 1rem; color: var(--pink); }
+  .nav-brand-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--white); letter-spacing: 0.04em;
+  }
+  .nav-brand-text span { color: var(--pink); }
+  .nav-tabs { display: flex; list-style: none; flex: 1; overflow-x: auto; }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tabs li { display: flex; }
+  .nav-tabs a {
+    display: flex; align-items: center;
+    padding: 0 1.2rem;
+    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.09em;
+    text-transform: uppercase; color: rgba(255,255,255,0.48);
+    text-decoration: none; border-bottom: 3px solid transparent;
+    transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+  }
+  .nav-tabs a:hover, .nav-tabs a.active {
+    color: var(--white); border-bottom-color: var(--pink);
+  }
+  .nav-cta {
+    display: flex; align-items: center; padding: 0 1.8rem;
+    background: var(--pink); color: var(--white);
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .nav-cta:hover { background: var(--pink-lt); }
+
+  /* ── PAGE SYSTEM ── */
+  .page { display: none; padding-top: 60px; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ══ HOME PAGE — dark cover ══ */
+  #page-home { background: var(--black); }
+
+  .home-cover {
+    min-height: calc(100vh - 60px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 5rem 3rem;
+    position: relative; overflow: hidden;
+  }
+  .home-cover::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(224,24,122,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(43,191,191,0.1) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .home-cover-eyebrow {
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--pink); margin-bottom: 1.8rem;
+  }
+  .home-cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 700; line-height: 0.95; color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+  .home-cover-title em { font-style: italic; color: var(--pink); }
+  .home-cover-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2vw, 1.4rem); font-style: italic;
+    color: rgba(255,255,255,0.45); margin-bottom: 2.5rem; letter-spacing: 0.02em;
+  }
+  .home-cover-rule {
+    width: 60px; height: 2px; background: var(--pink); margin: 0 auto 2.5rem;
+  }
+  .home-cover-desc {
+    font-size: 0.95rem; color: rgba(255,255,255,0.55);
+    max-width: 48ch; line-height: 1.85; margin: 0 auto 3rem;
+  }
+  .home-cover-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-pink {
+    display: inline-block; background: var(--pink); color: var(--white);
+    padding: 0.8rem 2rem; font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+    border: 2px solid var(--pink); transition: background 0.2s, color 0.2s;
+  }
+  .btn-pink:hover { background: transparent; color: var(--pink); }
+  .btn-outline-white {
+    display: inline-block; background: transparent; color: rgba(255,255,255,0.65);
+    padding: 0.8rem 2rem; font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.22);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline-white:hover { border-color: var(--white); color: var(--white); }
+
+  .home-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 0;
+  }
+  .home-stat {
+    padding: 2.5rem 2rem; text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .home-stat:last-child { border-right: none; }
+  .home-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 700; color: var(--white); line-height: 1;
+    display: block;
+  }
+  .home-stat-label {
+    font-size: 0.68rem; color: rgba(255,255,255,0.4);
+    text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.4rem;
+    display: block;
+  }
+
+  /* ══ INNER PAGES — white background ══ */
+  #page-lou, #page-pr, #page-eval, #page-draft, #page-final {
+    background: var(--off-white);
+  }
+
+  /* Inner page header bar (replaces hero on inner pages) */
+  .page-header {
+    background: var(--white);
+    border-bottom: 3px solid var(--pink);
+    padding: 3.5rem 6rem 3rem;
+  }
+  .page-header-eyebrow {
+    font-size: 0.63rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--pink); margin-bottom: 0.8rem;
+  }
+  .page-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700;
+    color: var(--black); line-height: 1.1;
+  }
+  .page-header h1 em { font-style: italic; color: var(--pink); }
+
+  /* ── CONTENT ── */
+  .content-wrap { max-width: 1100px; margin: 0 auto; padding: 5rem 4rem; }
+  .content-wrap.narrow { max-width: 820px; }
+  .section-eyebrow {
+    font-size: 0.63rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--pink); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700;
+    color: var(--black); margin-bottom: 1.4rem; line-height: 1.1;
+  }
+  .section-title em { font-style: italic; }
+  .pink-rule { width: 48px; height: 3px; background: var(--pink); margin-bottom: 2.5rem; }
+  .body-text { font-size: 0.93rem; color: #3A3028; line-height: 1.9; margin-bottom: 1.4rem; }
+  hr.section-rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
+
+  /* ── REPORT CARDS ── */
+  .report-card {
+    background: var(--white); border: 1px solid var(--rule);
+    border-top: 4px solid var(--pink); padding: 3rem; margin-bottom: 2.5rem;
+  }
+  .report-number {
+    display: inline-block; background: var(--pink); color: var(--white);
+    padding: 0.3rem 1rem; font-size: 0.63rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.5rem;
+  }
+  .report-meta {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule);
+  }
+  .report-meta-item .label {
+    font-size: 0.61rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--pink); margin-bottom: 0.2rem;
+  }
+  .report-meta-item .value { font-size: 0.86rem; color: var(--black); font-weight: 500; }
+  .report-section-title {
+    font-size: 0.64rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--mid); margin: 1.8rem 0 0.7rem;
+  }
+  .report-section-title:first-of-type { margin-top: 0; }
+
+  /* ── EMAIL THREAD ── */
+  .email-thread { display: flex; flex-direction: column; }
+  .email-card { border: 1px solid var(--rule); border-top: none; }
+  .email-card:first-child { border-top: 1px solid var(--rule); }
+  .email-card.outbound { background: var(--white); }
+  .email-card.outbound .email-header { background: var(--black); }
+  .email-card.inbound { background: #F0FBF0; }
+  .email-card.inbound .email-header { background: #1E3A20; }
+  .email-header {
+    padding: 0.9rem 1.8rem;
+    display: grid; grid-template-columns: 52px 1fr; gap: 0.15rem 0; align-items: baseline;
+  }
+  .email-header-label {
+    font-size: 0.58rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--pink); line-height: 1.8;
+  }
+  .email-card.inbound .email-header-label { color: #8EC990; }
+  .email-header-value { font-size: 0.81rem; color: rgba(255,255,255,0.82); line-height: 1.8; }
+  .email-subject {
+    font-family: 'Cormorant Garamond', serif; font-size: 0.98rem;
+    font-weight: 700; color: var(--white); grid-column: 1/-1;
+    margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .email-body {
+    padding: 1.5rem 1.8rem; font-size: 0.87rem;
+    color: #3A3028; line-height: 1.85; white-space: pre-line;
+  }
+  .email-card.inbound .email-body { color: #1A2E1A; }
+
+  /* ── DELIVERABLE TABS ── */
+  .deliverable-tabs { display: flex; border-bottom: 2px solid var(--rule); margin-bottom: 3rem; }
+  .dtab {
+    padding: 0.8rem 1.8rem; font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+    border: none; border-bottom: 3px solid transparent; margin-bottom: -2px;
+    color: var(--mid); background: transparent; transition: color 0.2s, border-color 0.2s;
+  }
+  .dtab.active { color: var(--black); border-bottom-color: var(--pink); }
+  .dtab:hover:not(.active) { color: var(--black); }
+  .dtab-content { display: none; }
+  .dtab-content.active { display: block; }
+
+  /* ── FLYER IMAGE GRID ── */
+  .flyer-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .flyer-img-card { border: 1px solid var(--rule); background: var(--white); }
+  .flyer-img-label {
+    background: var(--pink); color: var(--white);
+    padding: 0.5rem 1rem; font-size: 0.63rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .flyer-img-card img { width: 100%; display: block; }
+  .flyer-img-placeholder {
+    display: none; height: 360px; background: var(--light);
+    align-items: center; justify-content: center;
+    font-size: 0.73rem; color: var(--mid); letter-spacing: 0.06em;
+    text-transform: uppercase; font-weight: 500;
+  }
+
+  /* ── FLYER MOCKUP ── */
+  .flyer-wrap { display: grid; grid-template-columns: 460px 1fr; gap: 4rem; align-items: start; }
+  .flyer-mockup { background: var(--white); border: 1px solid var(--rule); }
+  .flyer-header { background: var(--pink); padding: 2.5rem; text-align: center; }
+  .flyer-header .org-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem; font-weight: 700; color: var(--white);
+    letter-spacing: 0.06em; display: block;
+  }
+  .flyer-header .org-sub {
+    font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); display: block; margin-top: 0.4rem;
+  }
+  .flyer-body {
+    padding: 2rem 2.5rem; background: var(--off-white);
+    border-left: 1px solid var(--rule); border-right: 1px solid var(--rule);
+  }
+  .flyer-body h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; color: var(--black); margin-bottom: 1rem; line-height: 1.3;
+  }
+  .flyer-body p { font-size: 0.83rem; color: #555; line-height: 1.75; margin-bottom: 1.2rem; }
+  .flyer-services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .flyer-svc-item {
+    background: var(--white); border: 1px solid var(--rule);
+    padding: 0.5rem 0.9rem; font-size: 0.76rem; font-weight: 500; color: var(--black);
+  }
+  .flyer-footer {
+    background: var(--pink); padding: 1rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .flyer-footer span { font-size: 0.76rem; font-weight: 700; color: var(--white); }
+
+  /* ── SOCIAL POSTS ── */
+  .posts-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .post-card { background: var(--white); border: 1px solid var(--rule); border-top: 3px solid var(--pink); }
+  .post-card-header {
+    background: var(--pink); padding: 0.9rem 1.3rem;
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .post-card-avatar {
+    width: 28px; height: 28px; background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.82rem; font-weight: 700; color: var(--pink); flex-shrink: 0;
+  }
+  .post-card-handle { font-size: 0.71rem; font-weight: 500; color: var(--white); }
+  .post-card-platform { font-size: 0.61rem; color: rgba(255,255,255,0.55); letter-spacing: 0.07em; }
+  .post-card-img {
+    height: 100px; background: var(--light); border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .post-card-img-label {
+    font-size: 0.63rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--mid);
+  }
+  .post-card-body { padding: 1rem 1.2rem; }
+  .post-card-body p { font-size: 0.8rem; line-height: 1.65; color: #444; }
+  .post-card-body strong { color: var(--black); }
+  .post-card-body .hashtags { color: var(--pink-dk); font-weight: 500; }
+  .post-card-footer { padding: 0.6rem 1.2rem; border-top: 1px solid var(--rule); display: flex; gap: 1.5rem; }
+  .post-card-footer span {
+    font-size: 0.63rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--mid);
+  }
+
+  /* ── BIO CARDS ── */
+  .bio-grid { display: flex; flex-direction: column; }
+  .bio-card {
+    display: grid; grid-template-columns: 220px 1fr;
+    border: 1px solid var(--rule); border-top: none; background: var(--white);
+  }
+  .bio-card:first-child { border-top: 1px solid var(--rule); }
+  .bio-card:nth-child(even) { background: var(--light); }
+  .bio-photo-wrap {
+    width: 220px; height: 220px; flex-shrink: 0;
+    border-right: 1px solid var(--rule); overflow: hidden; background: var(--light);
+  }
+  .bio-photo-wrap img {
+    width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
+  }
+  .bio-ph-placeholder {
+    width: 100%; height: 100%; background: var(--pink);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .bio-ph-init {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 700; color: var(--white);
+  }
+  .bio-content { padding: 2rem 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+  .bio-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem; font-weight: 700; color: var(--black); margin-bottom: 0.6rem;
+  }
+  .bio-text { font-size: 0.87rem; color: #444; line-height: 1.85; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--black); padding: 2rem 6rem; }
+  .footer-bottom {
+    display: flex; justify-content: space-between;
+    font-size: 0.7rem; color: rgba(255,255,255,0.28);
+    border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    .home-stats { grid-template-columns: 1fr; }
+    .flyer-wrap { grid-template-columns: 1fr; }
+    .posts-grid { grid-template-columns: 1fr 1fr; }
+    .page-header { padding: 3rem 2rem 2.5rem; }
+    footer { padding: 2rem; }
+    .content-wrap { padding: 3rem 2rem; }
+  }
+  @media (max-width: 600px) {
+    .posts-grid, .flyer-img-grid { grid-template-columns: 1fr; }
+    .bio-card { grid-template-columns: 1fr; }
+    .bio-photo-wrap { width: 100%; height: 240px; border-right: none; border-bottom: 1px solid var(--rule); }
+    nav { height: auto; flex-wrap: wrap; }
+    .nav-tabs { order: 3; width: 100%; border-top: 1px solid rgba(255,255,255,0.08); }
+    .footer-bottom { flex-direction: column; gap: 0.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand" onclick="showPage('home')">
+    <span class="nav-paw">🐾</span>
+    <span class="nav-brand-text">The <span>Kia</span> Foundation</span>
+  </div>
+  <ul class="nav-tabs">
+    <li><a href="#" onclick="return showPage('home')"  id="tab-home"  class="active">Home</a></li>
+    <li><a href="#" onclick="return showPage('lou')"   id="tab-lou">Letter of Understanding</a></li>
+    <li><a href="#" onclick="return showPage('pr')"    id="tab-pr">Progress Reports</a></li>
+    <li><a href="#" onclick="return showPage('eval')"  id="tab-eval">Bios</a></li>
+    <li><a href="#" onclick="return showPage('draft')" id="tab-draft">Draft of Team Deliverables</a></li>
+    <li><a href="#" onclick="return showPage('final')" id="tab-final">Final Deliverable</a></li>
+  </ul>
+  <a href="https://www.thekiafoundation.org" target="_blank" class="nav-cta">Visit Site</a>
+</nav>
+
+
+<!-- ══════════════════════════════════════ -->
+<!-- PAGE: HOME                             -->
+<!-- ══════════════════════════════════════ -->
+<div id="page-home" class="page active">
+  <div class="home-cover">
+    <h1 class="home-cover-title">The Kia Foundation</h1>
+    <p class="home-cover-sub">Preventing animals from being in crisis by strengthening the common bond between owner and pet through assistance and education.</p>
+    
+    <div class="home-cover-actions">
+    </div>
+  </div>
+  <div class="home-stats">
+    <div class="home-stat">
+      <span class="home-stat-num">200,000</span>
+      <span class="home-stat-label">Pounds of pet food distributed since 2018</span>
+    </div>
+    <div class="home-stat">
+      <span class="home-stat-num">15,000</span>
+      <span class="home-stat-label">Families and individuals served</span>
+    </div>
+    <div class="home-stat">
+      <span class="home-stat-num">30,000</span>
+      <span class="home-stat-label">Cats and dogs impacted</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════ -->
+<!-- PAGE: LETTER OF UNDERSTANDING          -->
+<!-- ══════════════════════════════════════ -->
+<div id="page-lou" class="page">
+  <div class="page-header">
+    <h1>Letter of Understanding</h1>
+  </div>
+  <div class="content-wrap narrow">
+    <p class="body-text">The Kia Foundation is a nonprofit organization that helps families who are struggling financially meet the cost of their pet care needs. Their motto is: <em>"preventing animals from being in crisis by strengthening the common bond between owner and pet through assistance and education."</em></p>
+    <p class="body-text">The Kia Foundation approaches every situation with a single goal: to make sure that every pet and their family has a strong, lasting bond that can survive even when the cost of healthcare, food, and supplies for the pet becomes a financial burden. The foundation strives to ensure that people do not have to surrender their pets to a shelter when a crisis strikes.</p>
+    <p class="body-text">The Kia Foundation does a great deal for the people of Central New York. Their services include hosting monthly mobile pet food and supply giveaways, providing a meal delivery membership service, operating a pet thrift shop, and maintaining a pet food pantry. All of these services allow families to provide for their pet no matter the circumstance.</p>
+    <p class="body-text">Sam Washington, the founder of The Kia Foundation, has a unique story for why he started the organization. Sam had a dog by the name of Kia. She was a 16 year old Shar Pei, Pitbull mix. In 2009, the Washington family was struggling financially and Kia's vet bills were simply too costly. Sam searched for a solution, but there was no organization out there that helped families in his specific situation. That is when Sam got the idea for The Kia Foundation.</p>
+    <p class="body-text">Since The Kia Foundation is such a unique organization, we were immediately drawn to support it. We want to do everything we can to make the foundation well known to all people in Central New York. We reached out to Sam and offered to make fliers to put on campus and in surrounding neighborhoods, as well as help create graphics to increase social media following. Our goal is to increase awareness of the foundation's mission and expand its reach within the community.</p>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════ -->
+<!-- PAGE: PROGRESS REPORTS                 -->
+<!-- ══════════════════════════════════════ -->
+<div id="page-pr" class="page">
+  <div class="page-header">
+    <h1>Progress Reports</h1>
+  </div>
+  <div class="content-wrap narrow">
+
+    <!-- ── REPORT I ── -->
+    <div class="report-card">
+      <div class="report-number">Progress Report No. 1</div>
+      <div class="email-thread">
+        <div class="email-card outbound">
+          <div class="email-header">
+            <span class="email-header-label">From</span><span class="email-header-value">Group 3</span>
+            <span class="email-header-label">Sent</span><span class="email-header-value">Thursday, March 26, 2026</span>
+            <span class="email-header-label">To</span><span class="email-header-value">The Kia Foundation Inc &lt;thekiafoundationinc@gmail.com&gt;</span>
+            <span class="email-subject">Subject: Student Project Partnership Inquiry – Advertising &amp; Social Media Support</span>
+          </div>
+          <div class="email-body">Dear Kia Foundation Inc,
+
+My name is Amirah Britt, and I'm a student at Syracuse University currently enrolled in WRT 307, a professional writing course. I've cc'd my group members Kriston, Ella, Jamyka, and Emma as we'll all be collaborating on this project together. As part of the group project, our team has been tasked with partnering with a local organization to help develop advertising and social media strategies.
+
+We're passionate about your mission and would love to use this project as an opportunity to create something useful for your organization. We'd love to learn more about your current goals and any challenges you're facing when it comes to marketing, social media presence, or driving awareness and sales for your thrift store.
+
+Would you be open to answering a few questions over email? Any insight you could share would go a long way in helping us tailor our project to your actual needs.
+
+Thank you so much for your time - we truly appreciate what you do for pets in our community and are excited about the possibility of working together.
+
+Warm regards,
+Group 3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── REPORT II ── -->
+    <div class="report-card">
+      <div class="report-number">Progress Report No. 2</div>
+      <div class="email-thread">
+        <div class="email-card outbound">
+          <div class="email-header">
+            <span class="email-header-label">From</span><span class="email-header-value">Group 3</span>
+            <span class="email-header-label">Sent</span><span class="email-header-value">Tuesday, April 7, 2026</span>
+            <span class="email-header-label">To</span><span class="email-header-value">The Kia Foundation Inc &lt;thekiafoundationinc@gmail.com&gt;</span>
+            <span class="email-subject">Subject: Follow-Up: Infographic &amp; Flyer Project Discussion</span>
+          </div>
+          <div class="email-body">Sam,
+
+Thank you so much for taking the time to connect with our group today! We are excited about the opportunity to help bring more attention to The Kia Foundation.
+
+As discussed on our call, we are planning to create an infographic and flyer that can be used across social media platforms and on campus to help bring more awareness to your organization. We want to make sure the final designs accurately reflect your vision and brand, so we'd love to align on a few things as we move forward:
+
+  • Any specific colors, logos, or branding guidelines you'd like us to follow
+  • Key messages or talking points you want highlighted
+
+We'll keep you updated on our progress and look forward to collaborating with you!
+
+Best regards,
+Group 3</div>
+        </div>
+
+        <div class="email-card outbound">
+          <div class="email-header">
+            <span class="email-header-label">From</span><span class="email-header-value">Group 3</span>
+            <span class="email-header-label">Sent</span><span class="email-header-value">Wednesday, April 15, 2026</span>
+            <span class="email-header-label">To</span><span class="email-header-value">The Kia Foundation Inc &lt;thekiafoundationinc@gmail.com&gt;</span>
+            <span class="email-subject">Subject: Follow-Up: Infographic &amp; Flyer Project Discussion</span>
+          </div>
+          <div class="email-body">Hello Sam,
+
+Currently, we are underway with the design phase pertaining to what we discussed last week Tuesday (4/7) and we are interested in your feedback on the design mockups that we have thus far.
+
+Attached below are two flyers that we intend to promote for student outreach concerning donations and volunteering efforts towards your organization. If there are any recommendations that you suggest we should consider, please feel free to let us know and we will happily make the appropriate changes.
+
+In addition to flyers for the organization as a whole, we recalled that you were interested in flyers that also promoted your upcoming outdoor pantry project and that there is a certain theme that you were focused on highlighting. Is there a particular point of reference that we can be provided for this version?
+
+Thank you once again for your time and consideration as we hope to hear from you soon!
+
+Sincerely,
+Jamyka Smith</div>
+        </div>
+
+        <div class="email-card inbound">
+          <div class="email-header">
+            <span class="email-header-label">From</span><span class="email-header-value">Sam Washington — The Kia Foundation &lt;thekiafoundationinc@gmail.com&gt;</span>
+            <span class="email-header-label">Sent</span><span class="email-header-value">TBD</span>
+            <span class="email-header-label">To</span><span class="email-header-value">Group 3</span>
+            <span class="email-subject">Subject: RE: Follow-Up: Infographic &amp; Flyer Project Discussion</span>
+          </div>
+          <div class="email-body">Hello all, the flyers look great.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════ -->
+<!-- PAGE: BIOS                             -->
+<!-- ══════════════════════════════════════ -->
+<div id="page-eval" class="page">
+  <div class="page-header">
+    <h1>Team Members</h1>
+  </div>
+  <div class="content-wrap">
+    <div class="bio-grid">
+
+      <div class="bio-card">
+        <div class="bio-photo-wrap">
+          <img src="img/EG.png" alt="Emma Argaez" onerror="this.closest('.bio-photo-wrap').innerHTML='<div class=\'bio-ph-placeholder\'><span class=\'bio-ph-init\'>EA</span></div>'"/>
+        </div>
+        <div class="bio-content">
+          <div class="bio-name">Emma Argaez</div>
+          <p class="bio-text">Emma Argaez spent her life as a pre-professional ballet dancer, a career that required mastering high-stakes transformation in front of the mirror. Through years of live performances and specialized makeup seminars, she gained hands-on experience with every imaginable style and technique. From delicate classical looks to bold stage variations, Emma has truly done it all. Her unique background allows her to break down professional secrets into easy, actionable steps for anyone to follow. Now, she is dedicated to sharing her lifetime of expertise to help you achieve professional-grade results for any occasion.</p>
+        </div>
+      </div>
+
+      <div class="bio-card">
+        <div class="bio-photo-wrap">
+          <img src="img/AB.png" alt="Amirah Britt" onerror="this.closest('.bio-photo-wrap').innerHTML='<div class=\'bio-ph-placeholder\'><span class=\'bio-ph-init\'>AB</span></div>'"/>
+        </div>
+        <div class="bio-content">
+          <div class="bio-name">Amirah Britt</div>
+          <p class="bio-text">Amirah Britt is a senior at Syracuse University with a concentration in Cybersecurity, on her way to a career as a cybersecurity analyst. She is passionate about entrepreneurship and financial freedom, with long-term goals in franchisee ownership. Outside of academics, Amirah enjoys designing for her clothing brand and has interests in health, wellness, and skincare. She is driven by a desire to build something meaningful and make lasting memories along the way.</p>
+        </div>
+      </div>
+
+      <div class="bio-card">
+        <div class="bio-photo-wrap">
+          <img src="img/EC.png" alt="Ella Cohn" onerror="this.closest('.bio-photo-wrap').innerHTML='<div class=\'bio-ph-placeholder\'><span class=\'bio-ph-init\'>EC</span></div>'"/>
+        </div>
+        <div class="bio-content">
+          <div class="bio-name">Ella Cohn</div>
+          <p class="bio-text">Ella Cohn is a senior at Syracuse University's Martin J. Whitman School of Management pursuing a dual major in Business Analytics and Finance. Through her coursework, she has developed experience with data visualization, statistical analysis, and financial modeling. On campus, she is involved in several service and student organizations, including the Community Service Organization. Outside of academics, Ella enjoys drawing, photography, and spending time with friends.</p>
+        </div>
+      </div>
+
+      <div class="bio-card">
+        <div class="bio-photo-wrap">
+          <img src="img/KN.png" alt="Kriston Noard" onerror="this.closest('.bio-photo-wrap').innerHTML='<div class=\'bio-ph-placeholder\'><span class=\'bio-ph-init\'>KN</span></div>'"/>
+        </div>
+        <div class="bio-content">
+          <div class="bio-name">Kriston Noard</div>
+          <p class="bio-text">Kriston Noard is a junior at Syracuse University. She is majoring in Sport Management, and minoring in Marketing. Kriston is a very creative person, and she loves finding ways to express herself. She also has a strong passion for sports, and watches them constantly. Her favorite sport to watch is football. She also loves reading, golfing, and going for walks in her free time.</p>
+        </div>
+      </div>
+
+      <div class="bio-card">
+        <div class="bio-photo-wrap">
+          <img src="img/JS.png" alt="Jamyka Smith" onerror="this.closest('.bio-photo-wrap').innerHTML='<div class=\'bio-ph-placeholder\'><span class=\'bio-ph-init\'>JS</span></div>'"/>
+        </div>
+        <div class="bio-content">
+          <div class="bio-name">Jamyka Smith</div>
+          <p class="bio-text">Jamyka Smith is a senior attending Syracuse University. With a background in Applied Data Analytics (major) and Architecture (minor), she hopes to establish a convergence between the two for this project as it pertains to makeup through kinesthetic analysis and the arts. Outside of class, she enjoys making practical crochet and other hobbyist projects for friends and family.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════ -->
+<!-- PAGE: DRAFT OF TEAM DELIVERABLES       -->
+<!-- ══════════════════════════════════════ -->
+<div id="page-draft" class="page">
+  <div class="page-header">
+    <h1>Draft of Team Deliverables</h1>
+  </div>
+  <div class="content-wrap">
+    <p class="body-text">The following four flyers represent Group 3's draft campaign materials for The Kia Foundation, designed for distribution on the Syracuse University campus and in surrounding neighborhoods.</p>
+    <div class="flyer-img-grid">
+      <div class="flyer-img-card">
+        <div class="flyer-img-label">Flyer 1</div>
+        <img src="img/1.png" alt="Flyer 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="flyer-img-placeholder">Place 1.png in the img/ folder</div>
+      </div>
+      <div class="flyer-img-card">
+        <div class="flyer-img-label">Flyer 2</div>
+        <img src="img/2.png" alt="Flyer 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="flyer-img-placeholder">Place 2.png in the img/ folder</div>
+      </div>
+      <div class="flyer-img-card">
+        <div class="flyer-img-label">Flyer 3</div>
+        <img src="img/3.png" alt="Flyer 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="flyer-img-placeholder">Place 3.png in the img/ folder</div>
+      </div>
+      <div class="flyer-img-card">
+        <div class="flyer-img-label">Flyer 4</div>
+        <img src="img/info.JPG" alt="Flyer 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="flyer-img-placeholder">Place info.JPG in the img/ folder</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════ -->
+<!-- PAGE: FINAL DELIVERABLE                -->
+<!-- ══════════════════════════════════════ -->
+<div id="page-final" class="page">
+  <div class="page-header">
+    <h1>Final Deliverable</h1>
+  </div>
+  <div class="content-wrap">
+    <p class="body-text">*WORK IN PROGRESS* The following materials represent Group 3's finalized deliverables for The Kia Foundation, revised following peer review and client feedback. They are print-ready and social-media-ready.</p>
+          </div>
+        </div>
+        <div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <span>WRT 307 Agency Project &nbsp;·&nbsp; Group 3 &nbsp;·&nbsp; Syracuse University &nbsp;·&nbsp; Spring 2026</span>
+  </div>
+</footer>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tabs a').forEach(a => a.classList.remove('active'));
+  const pg = document.getElementById('page-' + id);
+  const tab = document.getElementById('tab-' + id);
+  if (pg) pg.classList.add('active');
+  if (tab) tab.classList.add('active');
+  window.scrollTo(0, 0);
+  return false;
+}
+function switchDTab(btn, targetId) {
+  const page = btn.closest('.page');
+  page.querySelectorAll('.dtab').forEach(t => t.classList.remove('active'));
+  page.querySelectorAll('.dtab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  const el = document.getElementById(targetId);
+  if (el) el.classList.add('active');
+}
+</script>
+</body>
+</html>
