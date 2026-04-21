@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --pink:      #E0187A;
+    --pink:      #e01879f5;
     --pink-lt:   #F04EA0;
     --pink-dk:   #B8126A;
     --cyan:      #2BBFBF;
@@ -692,18 +692,15 @@ hr.section-rule {
   footer {
     background: var(--blue);
     border-top: 2px solid rgba(255,255,255,0.15);
-    padding: 2rem 0;
+    padding: 4px 0 2px;
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 1.1;
   }
 
-  .footer-bottom {
-    max-width: var(--grid-max);
-    margin: 0 auto;
-    padding: 0 var(--grid-pad);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 0.72rem;
+  footer p {
+    margin: 10px 0;
+    font-size: inherit;
     color: rgba(255,255,255,0.6);
   }
 
@@ -713,7 +710,6 @@ hr.section-rule {
     .posts-grid { grid-template-columns: 1fr 1fr; }
     .page-header { padding: 3rem 0 2.5rem; }
     .page-header h1, .page-header .page-header-eyebrow, .content-wrap { padding-left: 2rem; padding-right: 2rem; }
-    footer { padding: 2rem; }
     .content-wrap { padding: 3rem 2rem; }
     .lou-document { padding: 2.5rem 2rem; }
   }
@@ -1157,9 +1153,8 @@ Sam</div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-bottom">
-    <span>WRT 307 Agency Project &nbsp;·&nbsp; Group 3 &nbsp;·&nbsp; Syracuse University &nbsp;·&nbsp; Spring 2026</span>
-  </div>
+  <p>WRT 307 Agency Project | Group 3 | Syracuse University | Spring 2026</p>
+  
 </footer>
 
 <script>
@@ -1183,4 +1178,4 @@ function switchDTab(btn, targetId) {
 }
 </script>
 </body>
-</html> 
+</html>
