@@ -32,7 +32,6 @@
     line-height: 1.6;
   }
 
-  /* ── NAV ── */
   nav {
     position: fixed; top:0; left:0; right:0; z-index:200;
     background: var(--blue);
@@ -76,11 +75,9 @@
   }
   .nav-cta:hover { background: var(--pink-lt); }
 
-  /* ── PAGE SYSTEM ── */
   .page { display: none; padding-top: 60px; min-height: 100vh; }
   .page.active { display: block; }
 
-  /* ══ HOME PAGE ══ */
   #page-home {
     background: var(--white);
   }
@@ -298,7 +295,6 @@
     display: block;
   }
 
-/* ══ INNER PAGES — white background ══ */
 #page-lou,
 #page-pr,
 #page-eval,
@@ -307,7 +303,6 @@
   background: var(--off-white);
 }
 
-/* Inner page header bar */
 .page-header {
   background: var(--white);
   border-bottom: 3px solid var(--pink);
@@ -345,7 +340,6 @@
   color: var(--pink);
 }
 
-/* ── CONTENT ── */
 .content-wrap {
   padding-top: 4rem;
   padding-bottom: 4rem;
@@ -397,7 +391,6 @@ hr.section-rule {
   margin: 3rem 0;
 }
 
-  /* ── LETTER OF UNDERSTANDING STYLES ── */
 .lou-document {
   background: var(--white);
   border: 1px solid var(--rule);
@@ -486,7 +479,6 @@ hr.section-rule {
   margin: 1.6rem 0 0.6rem;
 }
 
-  /* ── REPORT CARDS ── */
   .report-card {
     background: var(--white);
     border: 1px solid var(--rule);
@@ -510,7 +502,6 @@ hr.section-rule {
   }
   .report-section-title:first-of-type { margin-top: 0; }
 
-  /* ── EMAIL THREAD ── */
   .email-thread { display: flex; flex-direction: column; }
   .email-card { border: 1px solid var(--rule); border-top: none; }
   .email-card:first-child { border-top: 1px solid var(--rule); }
@@ -539,7 +530,6 @@ hr.section-rule {
   }
   .email-card.inbound .email-body { color: #1A2E1A; }
 
-  /* ── DELIVERABLE TABS ── */
   .deliverable-tabs { display: flex; border-bottom: 2px solid var(--rule); margin-bottom: 3rem; }
   .dtab {
     padding: 0.8rem 1.8rem; font-size: 0.68rem; font-weight: 600;
@@ -552,7 +542,6 @@ hr.section-rule {
   .dtab-content { display: none; }
   .dtab-content.active { display: block; }
 
-  /* ── FLYER IMAGE GRID ── */
   .flyer-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
   .flyer-img-card { border: 1px solid var(--rule); background: var(--white); }
   .flyer-img-label {
@@ -568,7 +557,6 @@ hr.section-rule {
     text-transform: uppercase; font-weight: 500;
   }
 
-  /* ===== BROCHURE DISPLAY ===== */
 
 .brochure-section {
   margin-top: 40px;
@@ -614,7 +602,6 @@ hr.section-rule {
   font-size: 12px;
 }
   
-  /* ── BIO CARDS — ULTRA MINIMAL (FINAL) ── */
   .bio-grid {
     display: flex;
     flex-direction: column;
@@ -688,7 +675,6 @@ hr.section-rule {
   }
 
 
-  /* ── FOOTER (FINAL CLEAN) ── */
   footer {
     background: var(--blue);
     border-top: 2px solid rgba(255,255,255,0.15);
@@ -726,7 +712,6 @@ hr.section-rule {
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-brand" onclick="showPage('home')">
     <span class="nav-paw">🐾</span>
@@ -744,9 +729,6 @@ hr.section-rule {
 </nav>
 
 
-<!-- ══════════════════════════════════════ -->
-<!-- PAGE: HOME                             -->
-<!-- ══════════════════════════════════════ -->
 <div id="page-home" class="page active">
   <div class="home-cover">
 
@@ -782,9 +764,7 @@ hr.section-rule {
   </div>
 </div>
 
-<!-- ══════════════════════════════════════ -->
-<!-- PAGE: LETTER OF UNDERSTANDING          -->
-<!-- ══════════════════════════════════════ -->
+
 <div id="page-lou" class="page">
   <div class="page-header">
     <h1>Letter of Understanding</h1>
@@ -792,7 +772,6 @@ hr.section-rule {
   <div class="content-wrap">
     <div class="lou-document">
 
-      <!-- Header metadata -->
       <table class="lou-meta-table">
         <tr>
           <td>Course</td>
@@ -830,18 +809,15 @@ hr.section-rule {
 
       <hr class="lou-divider"/>
 
-      <!-- Purpose -->
       <h2 class="lou-section-heading">Purpose of the Project</h2>
       <p class="lou-body">The purpose of this project is for our WRT 307 team to support the Kia Foundation in Syracuse, NY. As a team, we offered to make fliers to put on campus and in surrounding neighborhoods, as well as help create graphics to increase social media following. Our goal is to increase awareness of the foundation's mission and expand its reach within the community.</p>
       <p class="lou-body">This Letter of Understanding outlines the expectations for the collaboration between the Kia Foundation and our WRT 307 team at Syracuse University. Our goal is to strengthen the foundation's outreach by developing materials that help increase visibility, engagement, and potential donations while aligning with the organization's mission.</p>
 
-      <!-- Agency Overview -->
       <h2 class="lou-section-heading">Agency Overview</h2>
       <p class="lou-body">The Kia Foundation is a nonprofit organization that helps families who are struggling financially meet the cost of their pet care needs. Their motto is: <em>"preventing animals from being in crisis by strengthening the common bond between owner and pet through assistance and education."</em> The Kia Foundation approaches every situation with a single goal: to make sure that every pet and their family has a strong, lasting bond that can survive even when the cost of healthcare, food, and supplies for the pet becomes a financial burden. The foundation strives to ensure that people don't have to surrender their pets to a shelter when a crisis strikes. They aim to support families in providing for their pets during times of crisis.</p>
       <p class="lou-body">The Kia Foundation does a lot for the people of Central New York to help them provide for their pets. Their services include hosting monthly mobile pet food and supply giveaways, providing a meal delivery membership service, operating a pet thrift shop, and maintaining a pet food pantry. All of these services allow for families to provide for their pet no matter the circumstance.</p>
       <p class="lou-body">Sam Washington, the founder of The Kia Foundation, has a unique story for why he started the organization. Sam had a dog by the name of Kia — a 16-year-old Shar Pei/Pitbull mix. In 2009, the Washington family was struggling financially and Kia's vet bills were simply too costly. Sam searched for a solution, but there was no organization out there that helped families in his specific situation. That is when Sam got the idea for The Kia Foundation.</p>
 
-      <!-- Responsibilities -->
       <h2 class="lou-section-heading">Responsibilities</h2>
 
       <p class="lou-sub-heading">Our WRT 307 Team Will:</p>
@@ -865,16 +841,13 @@ hr.section-rule {
 </div>
 
 
-<!-- ══════════════════════════════════════ -->
-<!-- PAGE: PROGRESS REPORTS                 -->
-<!-- ══════════════════════════════════════ -->
+
 <div id="page-pr" class="page">
   <div class="page-header">
     <h1>Progress Reports</h1>
   </div>
   <div class="content-wrap narrow">
 
-    <!-- ── REPORT I ── -->
     <div class="report-card">
       <div class="email-thread">
         <div class="email-card outbound">
@@ -913,7 +886,6 @@ Sam</div>
       </div>
     </div>
 
-    <!-- ── REPORT II ── -->
     <div class="report-card">
       <div class="email-thread">
         <div class="email-card outbound">
@@ -980,9 +952,6 @@ Sam</div>
 </div>
 
 
-<!-- ══════════════════════════════════════ -->
-<!-- PAGE: BIOS                             -->
-<!-- ══════════════════════════════════════ -->
 <div id="page-eval" class="page">
   <div class="page-header">
     <h1>Team Members</h1>
@@ -1045,9 +1014,7 @@ Sam</div>
 </div>
 
 
-<!-- ══════════════════════════════════════ -->
-<!-- PAGE: DRAFT OF TEAM DELIVERABLES       -->
-<!-- ══════════════════════════════════════ -->
+
 <div id="page-draft" class="page">
   <div class="page-header">
     <h1>Draft of Team Deliverables</h1>
@@ -1068,11 +1035,6 @@ Sam</div>
 </div>
 
 
-<!-- ══════════════════════════════════════ -->
-<!-- PAGE: FINAL DELIVERABLE                -->
-<!-- ══════════════════════════════════════ -->
-<!-- ONLY SHOWING THE FINAL DELIVERABLE SECTION FIXED (everything else stays the same) -->
-
 <div id="page-final" class="page">
   <div class="page-header">
     <h1>Final Deliverable</h1>
@@ -1087,7 +1049,6 @@ Sam</div>
     <p class="body-text">
       Throughout the process, we revised layouts, clarified wording, and refined the overall design to make the materials more effective. Sam provided feedback on the flyer designs through both email and a phone call, including suggestions related to the outdoor pantry, which helped guide our revisions. All of the deliverables are print-ready and can also be used on social media for promotion.    </p>
     </p>
-    <!-- FLYERS -->
     <div class="flyer-img-grid">
 
       <div class="flyer-img-card">
@@ -1122,21 +1083,18 @@ Sam</div>
 
     </div>
 
-    <!-- BROCHURE (NOW CORRECTLY INSIDE FINAL PAGE) -->
     <div class="brochure-section">
 
       <h2 class="brochure-title">Tri-Fold Brochure</h2>
 
       <div class="brochure-grid">
 
-        <!-- PAGE 1 -->
         <div class="brochure-card">
           <div class="brochure-label">Brochure — Outside (Page 1)</div>
           <img src="img/Brochure1.png" alt="Brochure Page 1"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
         </div>
 
-        <!-- PAGE 2 -->
         <div class="brochure-card">
           <div class="brochure-label">Brochure — Inside (Page 2)</div>
           <img src="img/Brochure2.png" alt="Brochure Page 2"
@@ -1151,7 +1109,6 @@ Sam</div>
 </div>
 
 
-<!-- FOOTER -->
 <footer>
   <div class="foot-center">
     <p>WRT 307 Agency Project | Group 3 | Syracuse University | Spring 2026</p>
