@@ -1,4 +1,4 @@
-Agency Portfolio – WRT 307 Service Learning Project  
+Agency Portfolio – WRT 307 Service Learning   
 Last Edit: 2026-04-21  
 ============================================================
 
